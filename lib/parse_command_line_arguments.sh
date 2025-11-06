@@ -340,15 +340,6 @@ _parse_command_line_arguments()
           return 1
         fi
         ;;
-      "--azure-storage-sas-url-log-file")
-        if [ -n "${2:-}" ]; then
-          __UAC_AZURE_STORAGE_SAS_URL_LOG_FILE="${2}"
-          shift
-        else
-          _error_msg "Option '${1}' requires an argument.\nTry 'uac --help' for more information."
-          return 1
-        fi
-        ;;
       "--delete-local-on-successful-transfer")
         __UAC_DELETE_LOCAL_ON_SUCCESSFUL_TRANSFER=true
         ;;
