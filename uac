@@ -289,12 +289,8 @@ if [ -n "${__UAC_AZURE_STORAGE_SAS_URL}" ]; then
   fi
   if command_exists "curl" || command_exists "wget"; then
     # add output file name to Azure Storage SAS URL
-    __UAC_AZURE_STORAGE_SAS_URL_TEMP=`echo "${__UAC_AZURE_STORAGE_SAS_URL}" | sed -e "s|?|/${__UAC_OUTPUT_BASE_NAME}.${__UAC_OUTPUT_EXTENSION}?|"`
+    __UAC_AZURE_STORAGE_SAS_URL_TEMP=`echo "${__UAC_AZURE_STORAGE_SAS_URL}" | sed -e "s|?|/transfer_test_from_uac.txt?|"`
 
-    __UAC_AZURE_STORAGE_SAS_URL_TEMP=`echo "${__UAC_AZURE_STORAGE_SAS_URL_TEMP}" \
-      | sed -e "s|%hostname%|${__UAC_HOSTNAME}|g" \
-            -e "s|%os%|${__UAC_OPERATING_SYSTEM}|g" \
-            -e "s|%timestamp%|${__ua_current_date_time}|g"`
     printf "Validating connectivity to the Azure Storage SAS URL...\n"
     _azure_storage_sas_url_transfer \
       "" \
@@ -761,10 +757,6 @@ if [ -n "${__UAC_AWS_S3_PRESIGNED_URL}" ]; then
     _error_msg "Failed to transfer output file to the S3 server."
   fi
   if [ -n "${__UAC_AWS_S3_PRESIGNED_URL_LOG_FILE}" ]; then
-    __UAC_AWS_S3_PRESIGNED_URL_LOG_FILE=`echo "${__UAC_AWS_S3_PRESIGNED_URL_LOG_FILE}" \
-      | sed -e "s|%hostname%|${__UAC_HOSTNAME}|g" \
-            -e "s|%os%|${__UAC_OPERATING_SYSTEM}|g" \
-            -e "s|%timestamp%|${__ua_current_date_time}|g"`
     printf "Transferring '%s' to Amazon S3 presigned URL...\n" "${__UAC_DESTINATION_DIR}/${__UAC_OUTPUT_BASE_NAME}.log"
     if _aws_s3_presigned_url_transfer \
         "${__UAC_OUTPUT_BASE_NAME}.log" \
