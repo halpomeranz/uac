@@ -16,6 +16,8 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Resolved a bug that prevented proper artifact collection when the mountpoint of a mounted disk image included spaces or special characters.
+
 ### Tools
 
 - `statx` updated to fix a bug where it was not parsing the special permissions returned by syscall `statx`. (by [synacktiv](https://github.com/synacktiv))

@@ -369,8 +369,13 @@ _log_msg INF "Setting up tools and parameters"
 _setup_tools 2>"${__UAC_TEMP_DATA_DIR}/setup_tools.stderr.txt"
 
 # get user list and their home directories (user:home)
-__UAC_USER_HOME_LIST=`_get_user_home_list false "${__UAC_MOUNT_POINT}"`
-__UAC_VALID_SHELL_ONLY_USER_HOME_LIST=`_get_user_home_list true "${__UAC_MOUNT_POINT}"`
+if [ "${__UAC_OPERATING_SYSTEM}" = "macos" ]; then
+  __UAC_USER_HOME_LIST=`_get_user_home_list false "${__UAC_MOUNT_POINT}" "/private/etc/passwd"`
+  __UAC_VALID_SHELL_ONLY_USER_HOME_LIST=`_get_user_home_list true "${__UAC_MOUNT_POINT}" "/private/etc/passwd"`
+else
+  __UAC_USER_HOME_LIST=`_get_user_home_list false "${__UAC_MOUNT_POINT}"`
+  __UAC_VALID_SHELL_ONLY_USER_HOME_LIST=`_get_user_home_list true "${__UAC_MOUNT_POINT}"`
+fi
 
 # exclude file systems / mount points (global)
 if [ -n "${__UAC_CONF_EXCLUDE_FILE_SYSTEM}" ]; then
