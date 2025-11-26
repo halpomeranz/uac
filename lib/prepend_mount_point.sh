@@ -18,7 +18,7 @@ _prepend_mount_point() {
   # add quotes to mount point if not /
   # required as some mount points/paths could have spaces or special characters
   if [ "${__pm_mount_point}" != "/" ]; then
-    __pm_mount_point=`echo "${__pm_mount_point}" | sed -e 's|^/|/"|' -e 's|$|"|'`
+    __pm_mount_point=`echo "${__pm_mount_point}" | sed -e 's|^"||' -e 's|"$||' -e 's|^/|/"|' -e 's|$|"|'`
   fi
 
   __pm_i=1

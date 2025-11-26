@@ -504,12 +504,17 @@ sed -e "s|^${__UAC_TEMP_DATA_DIR}/collected||" \
     -e 's|^/||' \
     "${__UAC_TEMP_DATA_DIR}/find_collected.tmp" \
     >"${__UAC_TEMP_DATA_DIR}/pre_output.tmp"
-# remove ${__UAC_MOUNT_POINT}|\[root\]/ from the beginning of any entry
+# awk is required to replace ${__UAC_MOUNT_POINT} by [root]/ as sed cannot handle special characters
 # remove entries that match ${__UAC_DIR}, /uac-data.tmp/, uac-x-x-x, and uac-%os%-%hostname%-%timestamp%
-sed -e "s|^${__UAC_MOUNT_POINT}|\[root\]/|" \
-    -e 's|//*|/|g' \
-    -e 's|^/||' \
-    "${__UAC_TEMP_DATA_DIR}/file_collector.tmp" \
+awk -v mount="${__UAC_MOUNT_POINT}" -v repl="[root]/" '
+  index($0, mount) == 1 {
+    print repl substr($0, length(mount) + 1)
+    next
+  }
+  {print}
+' "${__UAC_TEMP_DATA_DIR}/file_collector.tmp" \
+  | sed -e 's|//*|/|g' \
+        -e 's|^/||' \
   | grep -v -E "${__UAC_DIR}|/uac-data.tmp/|uac-[0-9]+.[0-9]+.[0-9]+-?|uac-[[:print:]]+-[[:print:]]+[0-9]{14}" \
     >>"${__UAC_TEMP_DATA_DIR}/pre_output.tmp"
 
