@@ -369,8 +369,13 @@ _log_msg INF "Setting up tools and parameters"
 _setup_tools 2>"${__UAC_TEMP_DATA_DIR}/setup_tools.stderr.txt"
 
 # get user list and their home directories (user:home)
-__UAC_USER_HOME_LIST=`_get_user_home_list false "${__UAC_MOUNT_POINT}"`
-__UAC_VALID_SHELL_ONLY_USER_HOME_LIST=`_get_user_home_list true "${__UAC_MOUNT_POINT}"`
+if [ "${__UAC_OPERATING_SYSTEM}" = "macos" ]; then
+  __UAC_USER_HOME_LIST=`_get_user_home_list false "${__UAC_MOUNT_POINT}" "/private/etc/passwd"`
+  __UAC_VALID_SHELL_ONLY_USER_HOME_LIST=`_get_user_home_list true "${__UAC_MOUNT_POINT}" "/private/etc/passwd"`
+else
+  __UAC_USER_HOME_LIST=`_get_user_home_list false "${__UAC_MOUNT_POINT}"`
+  __UAC_VALID_SHELL_ONLY_USER_HOME_LIST=`_get_user_home_list true "${__UAC_MOUNT_POINT}"`
+fi
 
 # exclude file systems / mount points (global)
 if [ -n "${__UAC_CONF_EXCLUDE_FILE_SYSTEM}" ]; then
@@ -499,12 +504,17 @@ sed -e "s|^${__UAC_TEMP_DATA_DIR}/collected||" \
     -e 's|^/||' \
     "${__UAC_TEMP_DATA_DIR}/find_collected.tmp" \
     >"${__UAC_TEMP_DATA_DIR}/pre_output.tmp"
-# remove ${__UAC_MOUNT_POINT}|\[root\]/ from the beginning of any entry
+# awk is required to replace ${__UAC_MOUNT_POINT} by [root]/ as sed cannot handle special characters
 # remove entries that match ${__UAC_DIR}, /uac-data.tmp/, uac-x-x-x, and uac-%os%-%hostname%-%timestamp%
-sed -e "s|^${__UAC_MOUNT_POINT}|\[root\]/|" \
-    -e 's|//*|/|g' \
-    -e 's|^/||' \
-    "${__UAC_TEMP_DATA_DIR}/file_collector.tmp" \
+awk -v mount="${__UAC_MOUNT_POINT}" -v repl="[root]/" '
+  index($0, mount) == 1 {
+    print repl substr($0, length(mount) + 1)
+    next
+  }
+  {print}
+' "${__UAC_TEMP_DATA_DIR}/file_collector.tmp" \
+  | sed -e 's|//*|/|g' \
+        -e 's|^/||' \
   | grep -v -E "${__UAC_DIR}|/uac-data.tmp/|uac-[0-9]+.[0-9]+.[0-9]+-?|uac-[[:print:]]+-[[:print:]]+[0-9]{14}" \
     >>"${__UAC_TEMP_DATA_DIR}/pre_output.tmp"
 
