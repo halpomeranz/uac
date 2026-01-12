@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Highlights
 
+- Introduced support for [user-defined variables](https://tclahr.github.io/uac-docs/user_defined_variables) passed via the command line `--define` / `-D`, which can be expanded in UAC artifacts using `%var%` or `%var=default_value%` syntax, enabling greater flexibility and customization ([#408](https://github.com/tclahr/uac/issues/408)).
 - The output and log file names are now automatically appended to the URL provided in `--azure-storage-sas-url` ([#389](https://github.com/tclahr/uac/issues/389)). Consequently, the `--azure-storage-sas-url-log-file` option is no longer needed and has been removed.
 - Introduced the `statf` tool, which leverages the `stat` system call to produce file status information in bodyfile format for FreeBSD-based systems lacking the `stat` and `perl` tools.
 
@@ -26,6 +27,7 @@ All notable changes to this project will be documented in this file.
 - `live_response/network/esxcli.yaml`: Updated collection of network firewall artifacts [esxi].
 - `live_response/network/ss.yaml`: Updated to show PACKET sockets, socket classic BPF filters, and show the process name and PID of the program to which socket belongs [linux]. (by [ekt0-syn](https://github.com/ekt0-syn))
 - `live_response/system/binfmt_misc`: Added collection of binfmt_misc handlers [linux]. (by [mnrkbys](https://github.com/mnrkbys))
+- `memory_dump/avml.yaml`: Updated to collect dumps when memory size is smaller than 64GB only. This behavior can be changed using the `avml_max_memory` variable [linux].
 
 ### Fixed
 
