@@ -1,0 +1,11 @@
+version: 1.0
+artifacts:
+  -
+    description: Collect /boot to help build Volatility profiles
+    supported_os: [linux]
+    collector: file
+    path: /boot
+
+# References:
+# https://www.iblue.team/memory-forensics-1/volatility-plugins/generate-custom-profile-using-btf2json
+# https://www.elastic.co/security-labs/the-grand-finale-on-linux-persistence
