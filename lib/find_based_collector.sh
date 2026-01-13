@@ -21,6 +21,7 @@
 #   boolean no_group: no group corresponds to file's numeric group ID (optional)
 #   boolean no_user: No user corresponds to file's numeric user ID (optional)
 #   boolean ignore_date_range: ignore date range (optional) (default: false)
+#   string command: command passed to xargs to execute on find output
 #   string output_directory: full path to the output directory
 #   string output_file: output file name
 # Returns:
@@ -61,6 +62,8 @@ _find_based_collector()
   __fc_no_user="${1:-false}"
   shift
   __fc_ignore_date_range="${1:-false}"
+  shift
+  __fc_command_xargs_pipe="${1:-}"
   shift
   __fc_output_directory="${1:-}"
   shift
@@ -149,6 +152,8 @@ _find_based_collector()
       if ${__fc_is_file_list}; then
         __fc_find_command="cat \"${__fc_path}\""
       else
+	[ -n "${__fc_command_xargs_pipe}" ] && __fc_print0="true" || __fc_print0="false"
+	      
         __fc_find_command=`_build_find_command \
           "${__fc_path}" \
           "${__fc_path_pattern}" \
@@ -162,13 +167,20 @@ _find_based_collector()
           "${__fc_permissions}" \
           "${__fc_no_group}" \
           "${__fc_no_user}" \
-          "" \
+          "${__fc_print0}" \
           "${__fc_start_date_days}" \
           "${__fc_end_date_days}"`
       fi
+      if [ "${__fc_collector}" = "find" ] && [ -n "${__fc_command_xargs_pipe}" ]; then
+	if ${__UAC_TOOL_FIND_PRINT0_SUPPORT} && ${__UAC_TOOL_XARGS_NULL_DELIMITER_SUPPORT}; then
+          __fc_find_command="${__fc_find_command} | xargs -0 ${__fc_command_xargs_pipe}"
+	else
+	  __fc_find_command="${__fc_find_command} | xargs ${__fc_command_xargs_pipe}"
+	fi
+      fi
       _verbose_msg "${__UAC_VERBOSE_CMD_PREFIX}${__fc_find_command}"
       _run_command "${__fc_find_command}" \
-        >>"${__fc_output_directory}/${__fc_output_file}"
+	>>"${__fc_output_directory}/${__fc_output_file}"
       ;;
     "hash")
       for __fc_algorithm in `echo "${__UAC_CONF_HASH_ALGORITHM}" | sed -e 's:|: :g'`; do
