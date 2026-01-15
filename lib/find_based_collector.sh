@@ -92,7 +92,7 @@ _find_based_collector()
   if ${__fc_is_file_list}; then
     # prepend __UAC_TEMP_DATA_DIR/collected if path does not start with /
     if echo "${__fc_path}" | grep -q -v -E "^/"; then
-      __fc_path="${__UAC_TEMP_DATA_DIR}/collected/${__fc_path}"
+      __fc_path="${__UAC_ARTIFACTS_OUTPUT_DIR}/${__fc_path}"
     fi
     __fc_path=`_sanitize_path "${__fc_path}"`
     if [ ! -f "${__fc_path}" ]; then
