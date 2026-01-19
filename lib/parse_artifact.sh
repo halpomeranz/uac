@@ -356,6 +356,7 @@ _parse_artifact()
                         "${__pa_no_group}" \
                         "${__pa_no_user}" \
                         "${__pa_ignore_date_range}" \
+                        "" \
                         "${__UAC_TEMP_DATA_DIR}" \
                         "file_collector.tmp"
                     elif [ "${__pa_collector}" = "find" ]; then
@@ -376,6 +377,7 @@ _parse_artifact()
                         "${__pa_no_group}" \
                         "${__pa_no_user}" \
                         "${__pa_ignore_date_range}" \
+                        "${__pa_new_command}" \
                         "${__pa_new_output_directory}" \
                         "${__pa_new_output_file}"
                     elif [ "${__pa_collector}" = "hash" ]; then
@@ -396,6 +398,7 @@ _parse_artifact()
                         "${__pa_no_group}" \
                         "${__pa_no_user}" \
                         "${__pa_ignore_date_range}" \
+                        "" \
                         "${__pa_new_output_directory}" \
                         "${__pa_new_output_file}"
                     elif [ "${__pa_collector}" = "stat" ]; then
@@ -416,6 +419,7 @@ _parse_artifact()
                         "${__pa_no_group}" \
                         "${__pa_no_user}" \
                         "${__pa_ignore_date_range}" \
+                        "" \
                         "${__pa_new_output_directory}" \
                         "${__pa_new_output_file}"
                     fi
@@ -447,6 +451,7 @@ _parse_artifact()
                   "${__pa_no_group}" \
                   "${__pa_no_user}" \
                   "${__pa_ignore_date_range}" \
+                  "" \
                   "${__UAC_TEMP_DATA_DIR}" \
                   "file_collector.tmp"
               elif [ "${__pa_collector}" = "find" ]; then
@@ -467,6 +472,7 @@ _parse_artifact()
                   "${__pa_no_group}" \
                   "${__pa_no_user}" \
                   "${__pa_ignore_date_range}" \
+                  "${__pa_command}" \
                   "${__pa_output_directory}" \
                   "${__pa_output_file}"
               elif [ "${__pa_collector}" = "hash" ]; then
@@ -487,6 +493,7 @@ _parse_artifact()
                   "${__pa_no_group}" \
                   "${__pa_no_user}" \
                   "${__pa_ignore_date_range}" \
+                  "" \
                   "${__pa_output_directory}" \
                   "${__pa_output_file}"
               elif [ "${__pa_collector}" = "stat" ]; then
@@ -507,6 +514,7 @@ _parse_artifact()
                   "${__pa_no_group}" \
                   "${__pa_no_user}" \
                   "${__pa_ignore_date_range}" \
+                  "" \
                   "${__pa_output_directory}" \
                   "${__pa_output_file}"
               fi
