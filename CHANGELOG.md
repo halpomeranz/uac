@@ -29,6 +29,12 @@ All notable changes to this project will be documented in this file.
 - `live_response/network/ss.yaml`: Updated to show PACKET sockets, socket classic BPF filters, and show the process name and PID of the program to which socket belongs [linux]. (by [ekt0-syn](https://github.com/ekt0-syn))
 - `live_response/system/binfmt_misc`: Added collection of binfmt_misc handlers [linux]. (by [mnrkbys](https://github.com/mnrkbys))
 - `memory_dump/avml.yaml`: Updated to collect dumps when memory size is smaller than 64GB only. This behavior can be changed using the `avml_max_memory` variable [linux].
+- `system/group_name_unknown_directories.yaml`: List directories with an unknown group ID name [aix, freebsd, linux, macos, netbsd, netscaler, openbsd, solaris]. ([#418](https://github.com/tclahr/uac/issues/418))
+- `system/group_writable_directories.yaml`: List group writable directories using permission bits mode -0040 [all]. ([#417](https://github.com/tclahr/uac/issues/417))
+- `system/group_writable_files.yaml`: List group writable files using permission bits mode -0040 [all]. ([#417](https://github.com/tclahr/uac/issues/417))
+- `system/user_name_unknown_directories.yaml`: List directories with an unknown user ID name [aix, freebsd, linux, macos, netbsd, netscaler, openbsd, solaris]. ([#418](https://github.com/tclahr/uac/issues/418))
+- `system/world_writable_directories.yaml`: Updated collection to use permission bits mode -0004 [all]. ([#417](https://github.com/tclahr/uac/issues/417))
+- `system/world_writable_files.yaml`: Updated collection to use permission bits mode -0004 [all]. ([#417](https://github.com/tclahr/uac/issues/417))
 
 ### Fixed
 
