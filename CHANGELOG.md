@@ -23,7 +23,10 @@ All notable changes to this project will be documented in this file.
 - `files/browsers/safari.yaml`: Added collection of affiliation database file [linux, macos].
 - `files/browsers/vivaldi.yaml`: Added collection of affiliation database file [linux, macos].
 - `files/system/biome.yaml`: Updated collection of Biome artifacts [macos].
+- `files/system/dbus.yaml`: Added collection of D-Bus config files, a possible persistence mechanism [linux]. (by [halpomeranz](https://github.com/halpomeranz))
+- `files/system/dracut.yaml`: Added collection of dracut config files, a possible persistence mechanism [linux]. (by [halpomeranz](https://github.com/halpomeranz))
 - `files/system/keychain.yaml`: Updated collection of macOS keychain artifacts [macos].
+- `files/system/polkit.yaml`: Added collection of polkit config files, a possible persistence mechanism [linux]. (by [halpomeranz](https://github.com/halpomeranz))
 - `files/system/startup_items.yaml`: Updated collection of macOS startup items [macos].
 - `live_response/network/esxcli.yaml`: Updated collection of network firewall artifacts [esxi].
 - `live_response/network/ss.yaml`: Updated to show PACKET sockets, socket classic BPF filters, and show the process name and PID of the program to which socket belongs [linux]. (by [ekt0-syn](https://github.com/ekt0-syn))
