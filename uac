@@ -548,6 +548,7 @@ if [ "${__UAC_OUTPUT_FORMAT}" = "none" ] || ${__UAC_HASH_COLLECTED} || ${__UAC_T
       "" \
       "" \
       "" \
+      "" \
       "${__UAC_ARTIFACTS_OUTPUT_DIR}" \
       "hash_list"
 

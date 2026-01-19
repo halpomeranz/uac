@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 - Introduced support for [user-defined variables](https://tclahr.github.io/uac-docs/user_defined_variables) passed via the command line `--define` / `-D`, which can be expanded in UAC artifacts using `%var%` or `%var=default_value%` syntax, enabling greater flexibility and customization ([#408](https://github.com/tclahr/uac/issues/408)).
 - The output and log file names are now automatically appended to the URL provided in `--azure-storage-sas-url` ([#389](https://github.com/tclahr/uac/issues/389)). Consequently, the `--azure-storage-sas-url-log-file` option is no longer needed and has been removed.
 - Introduced the `statf` tool, which leverages the `stat` system call to produce file status information in bodyfile format for FreeBSD-based systems lacking the `stat` and `perl` tools.
+- You can now use the `find` collector to run a specified `command` once for each matched file ([#420](https://github.com/tclahr/uac/issues/420)). Please check the [documentation](https://tclahr.github.io/uac-docs/artifacts/#field-reference-and-examples) for more information. (by [halpomeranz](https://github.com/halpomeranz))
 
 ### Artifacts
 
