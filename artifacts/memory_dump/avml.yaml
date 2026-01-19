@@ -1,8 +1,10 @@
-version: 2.1
+version: 2.2
 output_directory: /memory_dump
 artifacts:
   -
     description: Capture a memory image.
     supported_os: [linux]
     collector: command
+    # use ./uac -D avml_max_memory=NEW_VALUE to change the default value
+    condition: test `free | awk '/^Mem:/ {print $2}'` -lt %avml_max_memory=68000000%
     command: avml avml.lime
