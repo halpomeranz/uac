@@ -18,6 +18,7 @@ artifacts:
   - live_response/network/*
   - bodyfile/bodyfile.yaml
   - live_response/system/*
+  - live_response/ssh/*
   - live_response/hardware/*
   - live_response/packages/*
   - !live_response/packages/package_owns_file.yaml
@@ -27,6 +28,7 @@ artifacts:
   - chkrootkit/*
   - hash_executables/hash_executables.yaml
   - system/*
+  - ssh/*
   - packages/*
   - osquery/osquery.yaml
   - files/applications/git.yaml

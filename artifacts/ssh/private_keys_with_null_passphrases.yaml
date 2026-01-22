@@ -1,0 +1,20 @@
+version: 1.0
+condition: command_exists "ssh-keygen"
+output_directory: /ssh
+artifacts:
+  -
+    description: Find all private key files.
+    supported_os: [all]
+    collector: find
+    path: /%user_home%/.ssh
+    file_type: [f]
+    exclude_name_pattern: ["authorized_keys", "known_hosts", "config", "*.pub"]
+    output_directory: /%temp_directory%/live_response/ssh
+    output_file: private_keys.txt
+  -
+    description: List SSH private keys with null passphrases.
+    supported_os: [all]
+    collector: command
+    foreach: cat /%temp_directory%/live_response/ssh/private_keys.txt
+    command: if ssh-keygen -P '' -y -f "%line%" >/dev/null; then echo "%line%"; fi
+    output_file: private_keys_with_null_passphrases.txt
