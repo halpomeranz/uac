@@ -18,7 +18,6 @@ artifacts:
   - live_response/network/*
   - bodyfile/bodyfile.yaml
   - live_response/system/*
-  - live_response/ssh/*
   - live_response/hardware/*
   - live_response/packages/*
   - !live_response/packages/package_owns_file.yaml
