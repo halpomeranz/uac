@@ -24,6 +24,7 @@ All notable changes to this project will be documented in this file.
 - `files/browsers/vivaldi.yaml`: Added collection of affiliation database file [linux, macos].
 - `files/ssh/public_keys.yaml`: Added collection of SSH public keys [all]. (by [halpomeranz](https://github.com/halpomeranz))
 - `files/system/biome.yaml`: Updated collection of Biome artifacts [macos].
+- `files/system/boot.yaml`: Added collection of boot config, initramfs/initrd, sysvers, System.map, and GRUB config files, possible persistence mechanisms [linux]. (by [halpomeranz](https://github.com/halpomeranz))
 - `files/system/dbus.yaml`: Added collection of D-Bus config files, a possible persistence mechanism [linux]. (by [halpomeranz](https://github.com/halpomeranz))
 - `files/system/dracut.yaml`: Added collection of dracut config files, a possible persistence mechanism [linux]. (by [halpomeranz](https://github.com/halpomeranz))
 - `files/system/keychain.yaml`: Updated collection of macOS keychain artifacts [macos].
@@ -32,7 +33,8 @@ All notable changes to this project will be documented in this file.
 - `live_response/network/esxcli.yaml`: Updated collection of network firewall artifacts [esxi].
 - `live_response/network/ss.yaml`: Updated to show PACKET sockets, socket classic BPF filters, and show the process name and PID of the program to which socket belongs [linux]. (by [ekt0-syn](https://github.com/ekt0-syn))
 - `live_response/system/binfmt_misc`: Added collection of binfmt_misc handlers [linux]. (by [mnrkbys](https://github.com/mnrkbys))
-- `memory_dump/avml.yaml`: Updated to collect dumps when memory size is smaller than 64GB only. This behavior can be changed using the `avml_max_memory` variable [linux].
+- `memory_dump/avml.yaml`: Updated to collect dumps when memory size is 256GB or less. This behavior can be changed using the `avml_max_memory` variable [linux].
+- `memory_dump/avml.yaml`: Updated to collect vmlinu* and System.map* files to help build Volatility profiles [linux]. (by [halpomeranz](https://github.com/halpomeranz))
 - `ssh/private_keys_with_null_passphrases.yaml`: Added collection of SSH public keys when the associated private key has a null (empty) passphrase [all]. (by [halpomeranz](https://github.com/halpomeranz))
 - `system/group_name_unknown_directories.yaml`: List directories with an unknown group ID name [aix, freebsd, linux, macos, netbsd, netscaler, openbsd, solaris]. ([#418](https://github.com/tclahr/uac/issues/418))
 - `system/group_writable_directories.yaml`: List group writable directories using permission bits mode -0040 [all]. ([#417](https://github.com/tclahr/uac/issues/417))
