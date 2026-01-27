@@ -12,9 +12,9 @@ artifacts:
     output_directory: /%temp_directory%/live_response/ssh
     output_file: private_keys.txt
   -
-    description: List SSH private keys with null passphrases.
+    description: Find SSH private keys with null passphrases and print their public keys.
     supported_os: [all]
     collector: command
     foreach: cat /%temp_directory%/live_response/ssh/private_keys.txt
-    command: if ssh-keygen -P '' -y -f "%line%" >/dev/null; then echo "%line%"; fi
-    output_file: private_keys_with_null_passphrases.txt
+    command: ssh-keygen -P '' -y -f "%line%"
+    output_file: ssh-keygen_-P_-y_-f_%line%.txt
