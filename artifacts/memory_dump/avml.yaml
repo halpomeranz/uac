@@ -1,4 +1,4 @@
-version: 2.3
+version: 2.4
 output_directory: /memory_dump
 artifacts:
   -
@@ -6,13 +6,13 @@ artifacts:
     supported_os: [linux]
     collector: command
     # use ./uac -D avml_max_memory=NEW_VALUE to change the default value
-    condition: test `free | awk '/^Mem:/ {print $2}'` -lt %avml_max_memory=68000000%
+    condition: test `free | awk '/^Mem:/ {print $2}'` -lt %avml_max_memory=270000000%
     command: avml avml.lime
   -
-    description: Collect /boot/vmlinu* files to help build Volatility profiles.
+    description: Collect vmlinu* and System.map* files to help build Volatility profiles.
     supported_os: [linux]
     collector: file
-    path: /boot/vmlinu*
+    path: /boot/vmlinu* /boot/System.map*
 
 # References:
 # https://www.iblue.team/memory-forensics-1/volatility-plugins/generate-custom-profile-using-btf2json
